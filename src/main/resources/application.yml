@@ -1,0 +1,13 @@
+app:
+  file:
+    path: /Users/a18388871/IdeaProjects/image-storage-service
+spring:
+  main:
+    banner-mode: log
+  application:
+    name: ImageStorage
+  profiles:
+    active: PROD
+
+
+

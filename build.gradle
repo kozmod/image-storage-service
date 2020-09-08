@@ -1,0 +1,38 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group = 'com.github.kozmo.photostorage'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '14'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    //logging
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
