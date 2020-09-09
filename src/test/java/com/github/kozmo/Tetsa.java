@@ -8,7 +8,8 @@ public class Tetsa {
 
     @Test
     void name() {
-        var p = Paths.get("./sss.class");
-        System.out.println(p);
+        var p = Paths.get("sss.class");
+        System.out.println(p.toFile());
+        System.out.println(p.toFile().getAbsolutePath());
     }
 }
