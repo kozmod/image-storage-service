@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div>
-    <p>__________________TEST TEXT __________</p>
     <div th:each="dir : ${dirs}">
         <div th:text="${dir.getFileName()}"></div>
         <div th:text="${dir}"></div>

@@ -6,15 +6,15 @@ plugins {
 }
 
 group = 'com.github.kozmo.photostorage'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2'
 sourceCompatibility = '14'
 
 docker {
     springBootApplication {
         baseImage = 'openjdk:14.0.2'
         ports = [9090, 8080]
-        images = ["${rootProject.name}:${version}"]
-        jvmArgs = ['-Dspring.profiles.active=production', '-Xmx512m']
+        images = ["kozmo/${rootProject.name}:${version}"]
+        jvmArgs = ['-Xmx512m']
     }
 }
 

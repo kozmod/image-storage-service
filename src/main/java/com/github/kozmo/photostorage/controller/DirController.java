@@ -12,7 +12,7 @@ import java.util.Map;
 @Controller
 public class DirController {
 
-    private final static String TEMPLATE = "test";
+    private final static String TEMPLATE = "test2";
 
     private final ImagesRootLoader imagesRootLoader;
 
