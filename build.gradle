@@ -9,7 +9,6 @@ group = 'com.github.kozmo.photostorage'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '14'
 
-// tag::extension[]
 docker {
     springBootApplication {
         baseImage = 'openjdk:14.0.2'
@@ -18,7 +17,6 @@ docker {
         jvmArgs = ['-Dspring.profiles.active=production', '-Xmx512m']
     }
 }
-// end::extension[]
 
 configurations {
     developmentOnly

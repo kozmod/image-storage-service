@@ -5,6 +5,6 @@
     <div th:each="dir : ${dirs}">
         <div th:text="${dir.getFileName()}"></div>
         <div th:text="${dir}"></div>
-        <img th:src="'/img' +${dir}"/>
+        <img th:src="'/img/' +${dir}"/>
     </div>
 </div>
