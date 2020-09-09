@@ -1,12 +1,24 @@
 plugins {
     id 'org.springframework.boot' version '2.3.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id "com.bmuschko.docker-spring-boot-application" version "6.6.1"
     id 'java'
 }
 
 group = 'com.github.kozmo.photostorage'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '14'
+
+// tag::extension[]
+docker {
+    springBootApplication {
+        baseImage = 'openjdk:14.0.2'
+        ports = [9090, 8080]
+        images = ["${rootProject.name}:${version}"]
+        jvmArgs = ['-Dspring.profiles.active=production', '-Xmx512m']
+    }
+}
+// end::extension[]
 
 configurations {
     developmentOnly

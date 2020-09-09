@@ -12,23 +12,23 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public final class ImagesRootLoader {
+public final class ImagesDirLoader {
 
-    private final String root;
+    private final String rootDir;
     private final ResourceLoader resourceLoader;
 
-    public ImagesRootLoader(String root, ResourceLoader resourceLoader) {
-        this.root = root;
+    public ImagesDirLoader(String root, ResourceLoader resourceLoader) {
+        this.rootDir = root;
         this.resourceLoader = resourceLoader;
     }
 
     public Resource load(String dir) throws IOException {
-        var path = "file:" + root + "/" + dir;
+        var path = "file:" + rootDir + "/" + dir;
         return resourceLoader.getResource(path);
     }
 
-    public Collection<Path> pathsInRoot() throws IOException {
-        return paths(root);
+    public Collection<Path> inRootDir() throws IOException {
+        return paths(rootDir);
     }
 
     public Collection<Path> paths(String dir) throws IOException {
@@ -48,6 +48,6 @@ public final class ImagesRootLoader {
     }
 
     private String replaceRoot(String val) {
-        return val.replaceFirst(root, "/");
+        return val.replaceFirst(rootDir, "/");
     }
 }
