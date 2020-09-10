@@ -12,20 +12,59 @@
             font-family: "Lato", sans-serif;
         }
     </style>
-    <link rel="stylesheet" th:href="@{css/image_gallery.css}" th:id="'user_theme_color'"/>
-    <link rel="stylesheet" th:href="@{css/sidebar.css}" th:id="'user_theme_pattern'"/>
+    <link rel="stylesheet" th:href="@{css/image_gallery.css}"/>
+    <link rel="stylesheet" th:href="@{css/sidebar.css}"/>
+    <link rel="stylesheet" th:href="@{css/tree_view.css}"/>
 </head>
 <body>
 <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+<!--    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
+    <!--    <a href="#">About</a>-->
+    <!--    <a href="#">Services</a>-->
+    <!--    <a href="#">Clients</a>-->
+    <!--    <a href="#">Contact</a>-->
+    <ul id="myUL">
+        <li class="tree_view_text"><span class="caret">Beverages</span>
+            <ul class="nested">
+                <li class="tree_view_text">Water</li>
+                <li class="tree_view_text">Coffee</li>
+                <li class="tree_view_text"><span class="caret">Tea</span>
+                    <ul class="nested">
+                        <li class="tree_view_text">Black Tea</li>
+                        <li class="tree_view_text">White Tea</li>
+                        <li class="tree_view_text"><span class="caret">Green Tea</span>
+                            <ul class="nested">
+                                <li class="tree_view_text">Sencha</li>
+                                <li class="tree_view_text">Gyokuro</li>
+                                <li class="tree_view_text">Matcha</li>
+                                <li class="tree_view_text">Pi Lo Chun</li>
+                                <li class="tree_view_text"><span class="caret">Green Tea</span>
+                                    <ul class="nested">
+                                        <li class="tree_view_text">Sencha</li>
+                                        <li class="tree_view_text">Gyokuro</li>
+                                        <li class="tree_view_text">Matcha</li>
+                                        <li class="tree_view_text">Pi Lo Chun</li>
+                                        <li class="tree_view_text"><span class="caret">Green Tea</span>
+                                            <ul class="nested">
+                                                <li class="tree_view_text">Sencha</li>
+                                                <li class="tree_view_text">Gyokuro</li>
+                                                <li class="tree_view_text">Matcha</li>
+                                                <li class="tree_view_text">Pi Lo Chun</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>
 
 <div id="main">
-    <button class="openbtn" onclick="openNav()"><</button>
+    <button id="open_sidebar_button" class="openbtn" onclick="openCloseNav()"><</button>
 </div>
 
 <!-- The four columns -->
@@ -50,14 +89,28 @@
         expandImg.parentElement.style.display = "block";
     }
 
-    function openNav() {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
+    function openCloseNav() {
+        const osb = document.getElementById("open_sidebar_button");
+        if (osb.textContent === "X"){
+            osb.textContent = "<"
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        } else if (osb.textContent === "<") {
+            osb.textContent = "X"
+
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
     }
 
-    function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
     }
 </script>
 
