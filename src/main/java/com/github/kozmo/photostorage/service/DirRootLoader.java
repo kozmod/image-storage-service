@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@Deprecated
 public final class DirRootLoader implements RootLoader {
 
     private final Path rootDir;

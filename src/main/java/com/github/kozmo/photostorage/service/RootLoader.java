@@ -2,11 +2,10 @@ package com.github.kozmo.photostorage.service;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Collection;
 
-public interface RootLoader {
+public interface RootLoader<T> {
 
-    Collection<Path> fromRoot() throws IOException;
+    T fromRoot() throws IOException;
 
-    Collection<Path> fromSub(Path dir) throws IOException;
+    T fromSub(Path dir) throws IOException;
 }

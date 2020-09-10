@@ -1,19 +1,24 @@
 package com.github.kozmo;
 
-import com.github.kozmo.photostorage.utils.CheckedFunction;
+import com.github.kozmo.photostorage.service.PathTreeUnit;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.stream.Collectors;
+
+import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class Tetsa {
 
     @Test
-    void name() throws IOException {
+    void pathTest() throws IOException {
         var root = Paths.get("/Users/a18388871/IdeaProjects/image-storage-service");
         System.out.println(root.resolve(Paths.get("")));
         Files.list(root.resolve(Paths.get("")))
@@ -24,8 +29,63 @@ public class Tetsa {
                 .map(x -> root.relativize(x))
                 .peek(x -> System.out.println(x))
                 .map(x -> root.resolve(x))
-              .peek(x -> System.out.println("x " +x))
+                .peek(x -> System.out.println("x " + x))
 //                .map(Paths::get)
                 .collect(Collectors.toList());
+    }
+
+    @Test
+    void walkTest() throws IOException {
+        var root = Paths.get("/Users/a18388871/IdeaProjects/image-storage-service");
+        Files.walk(root).sorted().forEach(System.out::println);
+    }
+
+    @Test
+    void walkFileTest() throws IOException {
+        class DirVisitor< T extends Path> extends SimpleFileVisitor<T> {
+            public PathTreeUnit current;
+            public final Deque<PathTreeUnit> parents = new ArrayDeque<>();
+
+            @Override
+            public FileVisitResult preVisitDirectory(T dir, BasicFileAttributes attrs) {
+                if (current == null) {
+                    current = new PathTreeUnit(dir);
+                } else {
+                    var tmpCurrent = new PathTreeUnit(dir);
+                    current.addChild(tmpCurrent);
+                    parents.add(current);
+                    current = tmpCurrent;
+                }
+                System.out.format("%s in \n", dir);
+                return CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult postVisitDirectory(T dir, IOException exc) throws IOException {
+                System.out.format("%s out \n", dir);
+                if (!parents.isEmpty()){
+                    current = parents.pollLast();
+                }
+                return CONTINUE;
+            }
+        }
+        DirVisitor<Path> visitor = new DirVisitor<>();
+
+        var root = Paths.get("/Users/a18388871/IdeaProjects/image-storage-service");
+        Files.walkFileTree(root, visitor);
+        var c = visitor.current;
+        System.out.println(c);
+    }
+
+    @Test
+    void name() {
+        Deque<String> q  = new ArrayDeque<>();
+        q.add("a");
+        q.add("b");
+        System.out.println(q);
+        System.out.println(q.pollLast());
+        System.out.println(q);
+        System.out.println(q.pollLast());
+        System.out.println(q);
     }
 }

@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public final class ImagesRootLoader implements RootLoader {
+public final class ImagesRootLoader implements RootLoader<Collection<Path>> {
 
     private final Path rootDir;
     private final ResourceLoader resourceLoader;
