@@ -28,16 +28,16 @@ public final class TreeDirRootLoader implements RootLoader<PathTreeUnit> {
         return visitor.current;
     }
 
-    private static class DirVisitor<T extends Path> extends SimpleFileVisitor<T> {
+    private class DirVisitor<T extends Path> extends SimpleFileVisitor<T> {
         public PathTreeUnit current;
         public final Deque<PathTreeUnit> parents = new ArrayDeque<>();
 
         @Override
         public FileVisitResult preVisitDirectory(T dir, BasicFileAttributes attrs) {
             if (current == null) {
-                current = new PathTreeUnit(dir);
+                current = pathUnit(dir);
             } else {
-                var tmpCurrent = new PathTreeUnit(dir);
+                var tmpCurrent = pathUnit(dir);
                 current.addChild(tmpCurrent);
                 parents.add(current);
                 current = tmpCurrent;
@@ -51,6 +51,10 @@ public final class TreeDirRootLoader implements RootLoader<PathTreeUnit> {
                 current = parents.pollLast();
             }
             return CONTINUE;
+        }
+
+        private PathTreeUnit pathUnit(T dir) {
+            return new PathTreeUnit(rootDir.relativize(dir));
         }
     }
 }
