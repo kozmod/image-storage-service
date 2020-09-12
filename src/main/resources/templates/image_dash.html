@@ -10,7 +10,31 @@
 
         body {
             margin: 0;
+            height: 100vh;
             font-family: "Lato", sans-serif;
+        }
+
+        html  {
+            height: 100%;
+        }
+
+        #wrapper {
+            height: calc(100% - 2px); /* for border */
+        }
+
+        #wrapper {
+            background:white;
+            width:100%;
+            position:relative;
+            border: 1px solid black;
+            /* black border */
+            margin:auto;
+            /* centre this div */
+        }
+        #center {
+            background-color:white;
+            margin: 10px;
+            /*font-size: 80%;*/
         }
     </style>
     <link rel="stylesheet" th:href="@{css/image_gallery.css}"/>
@@ -18,7 +42,6 @@
     <link rel="stylesheet" th:href="@{css/tree_view.css}"/>
     <script type="text/javascript" th:src="@{js/jquery.js}"></script>
     <script type="text/javascript" th:src="@{js/changeFunc.js}"></script>
-    <script type="text/javascript" th:src="@{js/gallery.js}"></script>
 </head>
 <body>
 <div id="mySidebar" class="sidebar">
@@ -63,11 +86,23 @@
     <button id="open_sidebar_button" class="openbtn" onclick="openCloseNav()"><</button>
 </div>
 
-<div id="content" class="animate_300">
-    <span> CONTENT </span>
+<div id="center" class="animate_300">
+    <div id="wrapper">
+        <div id="content">
+            <div th:replace="fragment/image_gallery :: immage_gallery"/>
+        </div>
+    </div>
 </div>
 
 <script>
+    function displayFunk(imgs) {
+        const expandImg = document.getElementById("expandedImg");
+        const imgText = document.getElementById("imgtext");
+        expandImg.src = imgs.src;
+        imgText.innerHTML = imgs.alt;
+        expandImg.parentElement.style.display = "block";
+    }
+
     function openCloseNav() {
         const osb = document.getElementById("open_sidebar_button");
         if (osb.textContent === "X") {

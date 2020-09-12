@@ -26,6 +26,7 @@
 .container {
     position: relative;
     display: none;
+    width:80vh;
 }
 
 /* Expanding image text */
