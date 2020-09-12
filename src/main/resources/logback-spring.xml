@@ -3,10 +3,14 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <springProfile name="DEV">
-                <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %green([%logger{36}.%M]) - %msg%n</pattern>
+                <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %green([%logger{36}.%M]) -
+                    %msg%n
+                </pattern>
             </springProfile>
             <springProfile name="PROD">
-                <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %green([%logger{36}.%M]) - %msg%n</pattern>
+                <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %green([%logger{36}.%M]) -
+                    %msg%n
+                </pattern>
             </springProfile>
         </encoder>
     </appender>

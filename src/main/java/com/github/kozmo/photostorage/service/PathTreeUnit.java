@@ -1,19 +1,18 @@
 package com.github.kozmo.photostorage.service;
 
 import java.nio.file.Path;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public final class PathTreeUnit {
     private final Path val;
-    private final List<PathTreeUnit> children;
+    private final Collection<PathTreeUnit> children;
 
-    public PathTreeUnit(Path val) {
+    public PathTreeUnit(Path val, Collection<PathTreeUnit> children) {
         this.val = val;
-        this.children = new LinkedList<>();
+        this.children = children;
     }
 
-    public boolean addChild(PathTreeUnit ptu){
+    public boolean addChild(PathTreeUnit ptu) {
         return children.add(ptu);
     }
 
@@ -21,7 +20,7 @@ public final class PathTreeUnit {
         return val;
     }
 
-    public List<PathTreeUnit> getChildren() {
+    public Collection<PathTreeUnit> getChildren() {
         return children;
     }
 

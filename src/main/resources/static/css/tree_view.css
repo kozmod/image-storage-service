@@ -6,6 +6,7 @@ ul, #myUL {
     margin: 0;
     padding: 0;
 }
+
 .tree_view_text {
     color: white;
 }
@@ -27,8 +28,8 @@ ul, #myUL {
 
 .caret-down::before {
     -ms-transform: rotate(90deg); /* IE 9 */
-    -webkit-transform: rotate(90deg); /* Safari */'
-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg); /* Safari */
+' transform: rotate(90 deg);
 }
 
 .nested {

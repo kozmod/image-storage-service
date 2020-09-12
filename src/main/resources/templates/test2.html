@@ -15,49 +15,41 @@
     <link rel="stylesheet" th:href="@{css/image_gallery.css}"/>
     <link rel="stylesheet" th:href="@{css/sidebar.css}"/>
     <link rel="stylesheet" th:href="@{css/tree_view.css}"/>
+    <script type="text/javascript" th:src="@{js/changeFunc.js}"></script>
 </head>
 <body>
 <div id="mySidebar" class="sidebar">
-<!--    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
-    <!--    <a href="#">About</a>-->
-    <!--    <a href="#">Services</a>-->
-    <!--    <a href="#">Clients</a>-->
-    <!--    <a href="#">Contact</a>-->
     <ul id="myUL">
-        <li class="tree_view_text"><span class="caret">Beverages</span>
+        <!--/*@thymesVar id="child" type="com.github.kozmo.photostorage.service.PathTreeUnit"*/-->
+        <!--/*@thymesVar id="schild" type="com.github.kozmo.photostorage.service.PathTreeUnit"*/-->
+        <li class="tree_view_text">
+            <span class="caret" th:text="'/'  + ${treeRoot.getValue().getFileName()}"
+                  th:onclick="getFragmentAndChangeDiv('#content',[[${treeRoot.getValue().getFileName()}]]);"
+            >ROOT_NODE</span>
             <ul class="nested">
-                <li class="tree_view_text">Water</li>
-                <li class="tree_view_text">Coffee</li>
-                <li class="tree_view_text"><span class="caret">Tea</span>
-                    <ul class="nested">
-                        <li class="tree_view_text">Black Tea</li>
-                        <li class="tree_view_text">White Tea</li>
-                        <li class="tree_view_text"><span class="caret">Green Tea</span>
-                            <ul class="nested">
-                                <li class="tree_view_text">Sencha</li>
-                                <li class="tree_view_text">Gyokuro</li>
-                                <li class="tree_view_text">Matcha</li>
-                                <li class="tree_view_text">Pi Lo Chun</li>
-                                <li class="tree_view_text"><span class="caret">Green Tea</span>
-                                    <ul class="nested">
-                                        <li class="tree_view_text">Sencha</li>
-                                        <li class="tree_view_text">Gyokuro</li>
-                                        <li class="tree_view_text">Matcha</li>
-                                        <li class="tree_view_text">Pi Lo Chun</li>
-                                        <li class="tree_view_text"><span class="caret">Green Tea</span>
-                                            <ul class="nested">
-                                                <li class="tree_view_text">Sencha</li>
-                                                <li class="tree_view_text">Gyokuro</li>
-                                                <li class="tree_view_text">Matcha</li>
-                                                <li class="tree_view_text">Pi Lo Chun</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                <div th:each="child, i : ${treeRoot.getChildren()}">
+                    <span class="caret" th:text="${child.getValue().getFileName()}"></span>
+                    <div th:fragment="fragment_node(child)" th:unless="${#lists.isEmpty(child.getChildren())}">
+                        <ul class="nested">
+                            <div th:each="schild, i : ${child.getChildren()}">
+                                <div th:switch="${schild.getChildren().isEmpty()}">
+                                    <li th:case="true" class="tree_view_text"
+                                        th:text="${schild.getValue().getFileName()}"
+                                        th:onclick="getFragmentAndChangeDiv('#content',[[${schild.getValue().getFileName()}]]);"
+                                    >CHILD
+                                    </li>
+                                    <li th:case="false" class="tree_view_text">
+                                        <span class="caret" th:text="${schild.getValue().getFileName()}"
+                                              th:onclick="getFragmentAndChangeDiv('#content',[[${schild.getValue().getFileName()}]]);"
+                                        ></span>
+                                        <ul class="nested" th:replace="this::fragment_node(${schild})"></ul>
+                                    </li>
+                                </div>
+                                <ul class="nested" th:replace="this::fragment_node(${schild})"></ul>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
             </ul>
         </li>
     </ul>
@@ -91,7 +83,7 @@
 
     function openCloseNav() {
         const osb = document.getElementById("open_sidebar_button");
-        if (osb.textContent === "X"){
+        if (osb.textContent === "X") {
             osb.textContent = "<"
             document.getElementById("mySidebar").style.width = "0";
             document.getElementById("main").style.marginLeft = "0";

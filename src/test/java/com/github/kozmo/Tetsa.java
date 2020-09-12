@@ -42,16 +42,16 @@ public class Tetsa {
 
     @Test
     void walkFileTest() throws IOException {
-        class DirVisitor< T extends Path> extends SimpleFileVisitor<T> {
+        class DirVisitor<T extends Path> extends SimpleFileVisitor<T> {
             public PathTreeUnit current;
             public final Deque<PathTreeUnit> parents = new ArrayDeque<>();
 
             @Override
             public FileVisitResult preVisitDirectory(T dir, BasicFileAttributes attrs) {
                 if (current == null) {
-                    current = new PathTreeUnit(dir);
+                    current = new PathTreeUnit(dir, new LinkedList<>());
                 } else {
-                    var tmpCurrent = new PathTreeUnit(dir);
+                    var tmpCurrent = new PathTreeUnit(dir, new LinkedList<>());
                     current.addChild(tmpCurrent);
                     parents.add(current);
                     current = tmpCurrent;
@@ -63,7 +63,7 @@ public class Tetsa {
             @Override
             public FileVisitResult postVisitDirectory(T dir, IOException exc) throws IOException {
                 System.out.format("%s out \n", dir);
-                if (!parents.isEmpty()){
+                if (!parents.isEmpty()) {
                     current = parents.pollLast();
                 }
                 return CONTINUE;
@@ -79,7 +79,7 @@ public class Tetsa {
 
     @Test
     void name() {
-        Deque<String> q  = new ArrayDeque<>();
+        Deque<String> q = new ArrayDeque<>();
         q.add("a");
         q.add("b");
         System.out.println(q);

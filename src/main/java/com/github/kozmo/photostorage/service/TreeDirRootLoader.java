@@ -3,17 +3,18 @@ package com.github.kozmo.photostorage.service;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 public final class TreeDirRootLoader implements RootLoader<PathTreeUnit> {
 
     private final Path rootDir;
+    private final Comparator<PathTreeUnit> unitComparator;
 
-    public TreeDirRootLoader(String root) {
-        this.rootDir = Paths.get(root);
+    public TreeDirRootLoader(Path rootDir, Comparator<PathTreeUnit> unitComparator) {
+        this.rootDir = rootDir;
+        this.unitComparator = unitComparator;
     }
 
     @Override
@@ -35,9 +36,9 @@ public final class TreeDirRootLoader implements RootLoader<PathTreeUnit> {
         @Override
         public FileVisitResult preVisitDirectory(T dir, BasicFileAttributes attrs) {
             if (current == null) {
-                current = pathUnit(dir);
+                current = sortedByNamePathUnit(dir);
             } else {
-                var tmpCurrent = pathUnit(dir);
+                var tmpCurrent = sortedByNamePathUnit(dir);
                 current.addChild(tmpCurrent);
                 parents.add(current);
                 current = tmpCurrent;
@@ -53,8 +54,8 @@ public final class TreeDirRootLoader implements RootLoader<PathTreeUnit> {
             return CONTINUE;
         }
 
-        private PathTreeUnit pathUnit(T dir) {
-            return new PathTreeUnit(rootDir.relativize(dir));
+        private PathTreeUnit sortedByNamePathUnit(T dir) {
+            return new PathTreeUnit(rootDir.relativize(dir), new TreeSet<>(unitComparator));
         }
     }
 }

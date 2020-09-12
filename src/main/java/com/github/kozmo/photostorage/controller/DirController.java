@@ -26,7 +26,7 @@ public class DirController {
     @GetMapping("/")
     public String loadPathsFromRootDir(Map<String, Object> model) throws IOException {
         model.put("dirs", imagesRootLoader.fromRoot());
-        model.put("tree", treeDirRootLoader.fromRoot());
+        model.put("treeRoot", treeDirRootLoader.fromRoot());
         return TEMPLATE;
     }
 
