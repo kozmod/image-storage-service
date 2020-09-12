@@ -18,6 +18,7 @@
     <link rel="stylesheet" th:href="@{css/tree_view.css}"/>
     <script type="text/javascript" th:src="@{js/jquery.js}"></script>
     <script type="text/javascript" th:src="@{js/changeFunc.js}"></script>
+    <script type="text/javascript" th:src="@{js/gallery.js}"></script>
 </head>
 <body>
 <div id="mySidebar" class="sidebar">
@@ -26,25 +27,24 @@
         <!--/*@thymesVar id="schild" type="com.github.kozmo.photostorage.service.PathTreeUnit"*/-->
         <li class="tree_view_text">
             <span class="caret" th:text="'/'  + ${treeRoot.value().getFileName()}"
-                  th:onclick="getFragmentAndChangeDiv('#content',[[${treeRoot.value()}]]);"
-            >ROOT_NODE</span>
+                  th:attr="onclick=|getFragmentAndChangeDiv('#content','root')|">ROOT_NODE</span>
             <ul class="nested">
                 <div th:each="child, i : ${treeRoot.children()}">
                     <span class="caret"
                           th:text="${child.value().getFileName()}"
-                          th:onclick="getFragmentAndChangeDiv('#content',[[${treeRoot.value()}]]);"></span>
+                          th:attr="onclick=|getFragmentAndChangeDiv('#content','${child.value()}')|"></span>
                     <div th:fragment="fragment_node(child)" th:unless="${#lists.isEmpty(child.children())}">
                         <ul class="nested">
                             <div th:each="schild, i : ${child.children()}">
                                 <div th:switch="${schild.children().isEmpty()}">
                                     <li th:case="true" class="tree_view_text"
                                         th:text="${schild.value().getFileName()}"
-                                        th:onclick="getFragmentAndChangeDiv('#content',[[${schild.value()}]]);"
+                                        th:attr="onclick=|getFragmentAndChangeDiv('#content','${schild.value()}')|"
                                     >CHILD
                                     </li>
                                     <li th:case="false" class="tree_view_text">
                                         <span class="caret" th:text="${schild.value().getFileName()}"
-                                              th:onclick="getFragmentAndChangeDiv('#content',[[${schild.value()}]]);"
+                                              th:attr="onclick=|getFragmentAndChangeDiv('#content','${schild.value()}')|"
                                         ></span>
                                         <ul class="nested" th:replace="this::fragment_node(${schild})"></ul>
                                     </li>
@@ -63,28 +63,11 @@
     <button id="open_sidebar_button" class="openbtn" onclick="openCloseNav()"><</button>
 </div>
 
-<!-- The four columns -->
-<div class="row">
-    <div class="column" th:each="dir : ${dirs}">
-        <img th:src="'/img/'+${dir}" th:alt="${dir.getFileName()}" style="width:100%" onclick="displayFunk(this);">
-    </div>
-</div>
-
-<div class="container">
-    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-    <img id="expandedImg" style="height:100%">
-    <div id="imgtext"></div>
+<div id="content" class="animate_300">
+    <span> CONTENT </span>
 </div>
 
 <script>
-    function displayFunk(imgs) {
-        const expandImg = document.getElementById("expandedImg");
-        const imgText = document.getElementById("imgtext");
-        expandImg.src = imgs.src;
-        imgText.innerHTML = imgs.alt;
-        expandImg.parentElement.style.display = "block";
-    }
-
     function openCloseNav() {
         const osb = document.getElementById("open_sidebar_button");
         if (osb.textContent === "X") {

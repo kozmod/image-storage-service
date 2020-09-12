@@ -13,7 +13,8 @@ import java.util.Map;
 @Controller
 public class DirController {
 
-    private final static String TEMPLATE = "test2";
+    private final static String DASH = "image_dash";
+    private final static String GALLERY = "fragment/image_gallery";
 
     private final ImagesRootLoader imagesRootLoader;
     private final TreeDirRootLoader treeDirRootLoader;
@@ -27,12 +28,20 @@ public class DirController {
     public String loadPathsFromRootDir(Map<String, Object> model) throws IOException {
         model.put("dirs", imagesRootLoader.fromRoot());
         model.put("treeRoot", treeDirRootLoader.fromRoot());
-        return TEMPLATE;
+        return DASH;
+    }
+
+
+    @GetMapping(value = "/dir/{path}")
+    public String getDirImageBlock(@PathVariable("path") String path,Map<String, Object> model) throws IOException {
+        path = path.equals("root") ? "" : path;
+        model.put("dirs", imagesRootLoader.fromSub(Paths.get(path)));
+        return GALLERY;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/img/{path}")
-    public Resource getImage(@PathVariable("path") String path) {
+    @RequestMapping(value = "/img")
+    public Resource getImage(@RequestParam String path) {
         return imagesRootLoader.load(Paths.get(path));
     }
 }
