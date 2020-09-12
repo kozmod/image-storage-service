@@ -3,6 +3,8 @@
     float: left;
     width: 15%;
     padding: 10px;
+    max-width: 10vh;
+    max-height: 10vh;
 }
 
 /* Style the images inside the grid */
@@ -22,6 +24,10 @@
     clear: both;
 }
 
+.row {
+    margin: 5px;
+}
+
 /* The expanding image container */
 .container {
     position: relative;
@@ -32,18 +38,27 @@
 /* Expanding image text */
 #imgtext {
     position: absolute;
+    margin: 5px;
     bottom: 15px;
     left: 15px;
     color: white;
-    font-size: 20px;
+    font-size: 5px;
 }
 
 /* Closable button inside the expanded image */
 .closebtn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
+    position:absolute;
+    top: 5px;
+    right: 5px;
     color: white;
-    font-size: 35px;
+    font-size: 20px;
+    -webkit-text-stroke: 1px black;
     cursor: pointer;
+}
+
+#expandedImg{
+    overflow:hidden;
+    margin: 5px;
+    text-align:center;
+    max-height:80vh;
 }
