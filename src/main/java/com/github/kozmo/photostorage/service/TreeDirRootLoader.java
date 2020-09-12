@@ -39,7 +39,7 @@ public final class TreeDirRootLoader implements RootLoader<PathTreeUnit> {
                 current = sortedByNamePathUnit(dir);
             } else {
                 var tmpCurrent = sortedByNamePathUnit(dir);
-                current.addChild(tmpCurrent);
+                current.add(tmpCurrent);
                 parents.add(current);
                 current = tmpCurrent;
             }

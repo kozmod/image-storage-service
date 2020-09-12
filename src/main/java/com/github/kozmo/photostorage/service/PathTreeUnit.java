@@ -12,15 +12,15 @@ public final class PathTreeUnit {
         this.children = children;
     }
 
-    public boolean addChild(PathTreeUnit ptu) {
+    public boolean add(PathTreeUnit ptu) {
         return children.add(ptu);
     }
 
-    public Path getValue() {
+    public Path value() {
         return val;
     }
 
-    public Collection<PathTreeUnit> getChildren() {
+    public Collection<PathTreeUnit> children() {
         return children;
     }
 

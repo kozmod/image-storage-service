@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -15,6 +16,7 @@
     <link rel="stylesheet" th:href="@{css/image_gallery.css}"/>
     <link rel="stylesheet" th:href="@{css/sidebar.css}"/>
     <link rel="stylesheet" th:href="@{css/tree_view.css}"/>
+    <script type="text/javascript" th:src="@{js/jquery.js}"></script>
     <script type="text/javascript" th:src="@{js/changeFunc.js}"></script>
 </head>
 <body>
@@ -23,24 +25,26 @@
         <!--/*@thymesVar id="child" type="com.github.kozmo.photostorage.service.PathTreeUnit"*/-->
         <!--/*@thymesVar id="schild" type="com.github.kozmo.photostorage.service.PathTreeUnit"*/-->
         <li class="tree_view_text">
-            <span class="caret" th:text="'/'  + ${treeRoot.getValue().getFileName()}"
-                  th:onclick="getFragmentAndChangeDiv('#content',[[${treeRoot.getValue().getFileName()}]]);"
+            <span class="caret" th:text="'/'  + ${treeRoot.value().getFileName()}"
+                  th:onclick="getFragmentAndChangeDiv('#content',[[${treeRoot.value()}]]);"
             >ROOT_NODE</span>
             <ul class="nested">
-                <div th:each="child, i : ${treeRoot.getChildren()}">
-                    <span class="caret" th:text="${child.getValue().getFileName()}"></span>
-                    <div th:fragment="fragment_node(child)" th:unless="${#lists.isEmpty(child.getChildren())}">
+                <div th:each="child, i : ${treeRoot.children()}">
+                    <span class="caret"
+                          th:text="${child.value().getFileName()}"
+                          th:onclick="getFragmentAndChangeDiv('#content',[[${treeRoot.value()}]]);"></span>
+                    <div th:fragment="fragment_node(child)" th:unless="${#lists.isEmpty(child.children())}">
                         <ul class="nested">
-                            <div th:each="schild, i : ${child.getChildren()}">
-                                <div th:switch="${schild.getChildren().isEmpty()}">
+                            <div th:each="schild, i : ${child.children()}">
+                                <div th:switch="${schild.children().isEmpty()}">
                                     <li th:case="true" class="tree_view_text"
-                                        th:text="${schild.getValue().getFileName()}"
-                                        th:onclick="getFragmentAndChangeDiv('#content',[[${schild.getValue().getFileName()}]]);"
+                                        th:text="${schild.value().getFileName()}"
+                                        th:onclick="getFragmentAndChangeDiv('#content',[[${schild.value()}]]);"
                                     >CHILD
                                     </li>
                                     <li th:case="false" class="tree_view_text">
-                                        <span class="caret" th:text="${schild.getValue().getFileName()}"
-                                              th:onclick="getFragmentAndChangeDiv('#content',[[${schild.getValue().getFileName()}]]);"
+                                        <span class="caret" th:text="${schild.value().getFileName()}"
+                                              th:onclick="getFragmentAndChangeDiv('#content',[[${schild.value()}]]);"
                                         ></span>
                                         <ul class="nested" th:replace="this::fragment_node(${schild})"></ul>
                                     </li>

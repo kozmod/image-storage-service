@@ -10,7 +10,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.stream.Collectors;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
@@ -52,7 +51,7 @@ public class Tetsa {
                     current = new PathTreeUnit(dir, new LinkedList<>());
                 } else {
                     var tmpCurrent = new PathTreeUnit(dir, new LinkedList<>());
-                    current.addChild(tmpCurrent);
+                    current.add(tmpCurrent);
                     parents.add(current);
                     current = tmpCurrent;
                 }
@@ -75,17 +74,5 @@ public class Tetsa {
         Files.walkFileTree(root, visitor);
         var c = visitor.current;
         System.out.println(c);
-    }
-
-    @Test
-    void name() {
-        Deque<String> q = new ArrayDeque<>();
-        q.add("a");
-        q.add("b");
-        System.out.println(q);
-        System.out.println(q.pollLast());
-        System.out.println(q);
-        System.out.println(q.pollLast());
-        System.out.println(q);
     }
 }

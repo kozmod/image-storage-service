@@ -4,7 +4,7 @@
  * @param reference
  */
 function getFragmentAndChangeDiv(divId, reference) {
-    echo("AAAAA") //fixme
+    alert(reference)
     // $.ajax({
     //     headers: {
     //         Accept: "text/plain; charset=utf-8", "Content-Type": "text/plain; charset=utf-8"

@@ -25,7 +25,7 @@ public class Conf {
     public TreeDirRootLoader treeDirRootLoader() {
         return new TreeDirRootLoader(
                 Paths.get(searchDir),
-                Comparator.comparing(ptu -> ptu.getValue().getFileName().toString())
+                Comparator.comparing(ptu -> ptu.value().getFileName().toString())
         );
     }
 }
