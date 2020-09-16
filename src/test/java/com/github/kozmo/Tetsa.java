@@ -1,6 +1,6 @@
 package com.github.kozmo;
 
-import com.github.kozmo.photostorage.service.PathTreeUnit;
+import com.github.kozmo.photostorage.service.path.PathTreeUnit;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

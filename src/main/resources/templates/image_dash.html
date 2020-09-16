@@ -34,8 +34,8 @@
 <body>
 <div id="mySidebar" class="sidebar">
     <ul id="myUL">
-        <!--/*@thymesVar id="child" type="com.github.kozmo.photostorage.service.PathTreeUnit"*/-->
-        <!--/*@thymesVar id="schild" type="com.github.kozmo.photostorage.service.PathTreeUnit"*/-->
+        <!--/*@thymesVar id="child" type="com.github.kozmo.photostorage.service.path.PathTreeUnit"*/-->
+        <!--/*@thymesVar id="schild" type="com.github.kozmo.photostorage.service.path.PathTreeUnit"*/-->
         <li class="tree_view_text">
             <span class="caret" th:text="'/'  + ${treeRoot.value().getFileName()}"
                   th:attr="onclick=|getFragmentAndChangeDiv('#content','root')|">ROOT_NODE</span>

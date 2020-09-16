@@ -1,11 +1,14 @@
 package com.github.kozmo.photostorage;
 
-import com.github.kozmo.photostorage.service.*;
+import com.github.kozmo.photostorage.service.path.ImagesPathLoader;
+import com.github.kozmo.photostorage.service.path.PagingImagesPathLoader;
+import com.github.kozmo.photostorage.service.path.PathLoader;
+import com.github.kozmo.photostorage.service.path.TreeDirPathLoader;
+import com.github.kozmo.photostorage.service.resource.FileResourceLoader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

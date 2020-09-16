@@ -1,4 +1,4 @@
-package com.github.kozmo.photostorage.service;
+package com.github.kozmo.photostorage.service.path;
 
 import java.nio.file.Path;
 import java.util.*;

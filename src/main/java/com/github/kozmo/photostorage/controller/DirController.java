@@ -1,8 +1,8 @@
 package com.github.kozmo.photostorage.controller;
 
-import com.github.kozmo.photostorage.service.FileResourceLoader;
-import com.github.kozmo.photostorage.service.PathLoader;
-import com.github.kozmo.photostorage.service.TreeDirPathLoader;
+import com.github.kozmo.photostorage.service.resource.FileResourceLoader;
+import com.github.kozmo.photostorage.service.path.PathLoader;
+import com.github.kozmo.photostorage.service.path.TreeDirPathLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

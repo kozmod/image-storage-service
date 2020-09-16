@@ -1,4 +1,4 @@
-package com.github.kozmo.photostorage.service;
+package com.github.kozmo.photostorage.service.resource;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
