@@ -1,7 +1,3 @@
-app:
-  file:
-    path: /Users/a18388871/IdeaProjects/image-storage-service/src/test/resources/tmp
-    paging: 100
 spring:
   main:
     banner-mode: log
