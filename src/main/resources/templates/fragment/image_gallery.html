@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="immage_gallery" >
+<div th:fragment="immage_gallery">
     <!-- The four columns -->
-    <div class="row">
-        <div class="column" th:each="dir : ${dirs}">
-            <img th:src="'/img?path='+${dir}" th:alt="${dir.getFileName()}" style="width:100%" onclick="displayFunk(this);">
+    <div class="horizontal-scrollable">
+        <div class="row">
+            <div class="column scrollable-column" th:each="dir : ${dirs}">
+                <img th:src="'/img?path='+${dir}" th:alt="${dir.getFileName()}" style="width:100%"
+                     onclick="displayFunk(this);">
+            </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="expanding-image-container">
         <span onclick="this.parentElement.style.display='none'" class="closebtn">X</span>
         <img id="expandedImg">
         <div id="imgtext"></div>

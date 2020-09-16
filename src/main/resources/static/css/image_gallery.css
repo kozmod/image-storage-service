@@ -42,8 +42,18 @@
     margin: 5px;
 }
 
+.horizontal-scrollable > .row {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.horizontal-scrollable > .row > .scrollable-column{
+    display: inline-block;
+    float: none;
+}
+
 /* The expanding image container */
-.container {
+.expanding-image-container {
     position: relative;
     display: none;
     width:80vh;
