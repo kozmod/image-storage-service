@@ -1,3 +1,17 @@
+#images-gallery-wrapper {
+    height: calc(100% - 2px); /* for border */
+}
+
+#images-gallery-wrapper {
+    background:white;
+    width:95%;
+    border: 1px solid black;
+    /* black border */
+    margin:auto;
+    /* centre this div */
+    overflow-x: scroll;
+}
+
 /* The grid: Four equal columns that floats next to each other */
 .column {
     float: left;

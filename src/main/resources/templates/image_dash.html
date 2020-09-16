@@ -18,24 +18,12 @@
             height: 100%;
         }
 
-        #wrapper {
-            height: calc(100% - 2px); /* for border */
-        }
-
-        #wrapper {
-            background:white;
-            width:95%;
-            border: 1px solid black;
-            /* black border */
-            margin:auto;
-            /* centre this div */
-        }
-
         #center {
             background-color:white;
             margin: 10px;
             /*font-size: 80%;*/
         }
+
     </style>
     <link rel="stylesheet" th:href="@{css/image_gallery.css}"/>
     <link rel="stylesheet" th:href="@{css/sidebar.css}"/>
@@ -82,12 +70,12 @@
     </ul>
 </div>
 
-<div id="main">
+<div id="sidebar-main">
     <button id="open_sidebar_button" class="openbtn" onclick="openCloseNav()"><</button>
 </div>
 
 <div id="center" class="animate_300">
-    <div id="wrapper">
+    <div id="images-gallery-wrapper">
         <div id="content">
             <div th:replace="fragment/image_gallery :: immage_gallery"/>
         </div>
@@ -108,12 +96,12 @@
         if (osb.textContent === "X") {
             osb.textContent = "<"
             document.getElementById("mySidebar").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
+            document.getElementById("sidebar-main").style.marginLeft = "0";
         } else if (osb.textContent === "<") {
             osb.textContent = "X"
 
             document.getElementById("mySidebar").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
+            document.getElementById("sidebar-main").style.marginLeft = "250px";
         }
     }
 
