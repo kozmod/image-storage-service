@@ -1,8 +1,6 @@
 package com.github.kozmo.photostorage.service;
 
 import com.github.kozmo.photostorage.utils.CheckedFunction;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,20 +10,12 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class ImagesPathLoader implements PathLoader<Collection<Path>>, PathResourceLoader {
+public class ImagesPathLoader implements PathLoader<Collection<Path>> {
 
     final Path rootDir;
-    final ResourceLoader resourceLoader;
 
-    public ImagesPathLoader(String root, ResourceLoader resourceLoader) {
-        this.rootDir = Paths.get(root);
-        this.resourceLoader = resourceLoader;
-    }
-
-    @Override
-    public Resource load(Path path) {
-        var resolvedPath = "file:" + rootDir.resolve(path);
-        return resourceLoader.getResource(resolvedPath);
+    public ImagesPathLoader(String rootDir) {
+        this.rootDir = Paths.get(rootDir);
     }
 
     @Override
