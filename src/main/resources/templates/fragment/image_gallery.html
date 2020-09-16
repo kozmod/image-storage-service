@@ -11,10 +11,19 @@
             </div>
         </div>
     </div>
+    <div th:if="${leftButton}">
+        <button class="paging-button" th:value="${limit}"><</button>
+    </div>
+    <div th:if="${rightButton}">
+        <button class="paging-button" th:value="-${limit}">></button>
+    </div>
 
-    <div class="expanding-image-container">
-        <span onclick="this.parentElement.style.display='none'" class="closebtn">X</span>
-        <img id="expandedImg">
-        <div id="imgtext"></div>
+
+    <div>
+        <div class="expanding-image-container">
+            <span onclick="this.parentElement.style.display='none'" class="closebtn">X</span>
+            <img id="expandedImg">
+            <div id="imgtext"></div>
+        </div>
     </div>
 </div>
