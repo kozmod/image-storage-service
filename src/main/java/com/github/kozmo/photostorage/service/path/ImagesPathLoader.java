@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class ImagesPathLoader implements PathLoader<Collection<Path>> {
+public final class ImagesPathLoader implements PathLoader<Collection<Path>> {
 
     final Path rootDir;
 
@@ -34,7 +34,7 @@ public class ImagesPathLoader implements PathLoader<Collection<Path>> {
                 .collect(Collectors.toList());
     }
 
-    boolean isImage(Path path) throws IOException {
+    private boolean isImage(Path path) throws IOException {
         var mimetype = Files.probeContentType(path);
         return mimetype != null && mimetype.split("/")[0].equals("image");
     }
