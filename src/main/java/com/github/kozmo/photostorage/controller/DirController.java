@@ -1,7 +1,7 @@
 package com.github.kozmo.photostorage.controller;
 
-import com.github.kozmo.photostorage.service.ImagesRootLoader;
-import com.github.kozmo.photostorage.service.TreeDirRootLoader;
+import com.github.kozmo.photostorage.service.ImagesPathLoader;
+import com.github.kozmo.photostorage.service.TreeDirPathLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +16,10 @@ public class DirController {
     private final static String DASH = "image_dash";
     private final static String GALLERY = "fragment/image_gallery";
 
-    private final ImagesRootLoader imagesRootLoader;
-    private final TreeDirRootLoader treeDirRootLoader;
+    private final ImagesPathLoader imagesRootLoader;
+    private final TreeDirPathLoader treeDirRootLoader;
 
-    public DirController(ImagesRootLoader imagesRootLoader, TreeDirRootLoader treeDirRootLoader) {
+    public DirController(ImagesPathLoader imagesRootLoader, TreeDirPathLoader treeDirRootLoader) {
         this.imagesRootLoader = imagesRootLoader;
         this.treeDirRootLoader = treeDirRootLoader;
     }

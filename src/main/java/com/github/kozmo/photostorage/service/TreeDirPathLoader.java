@@ -7,12 +7,12 @@ import java.util.*;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
-public final class TreeDirRootLoader implements RootLoader<PathTreeUnit> {
+public final class TreeDirPathLoader implements PathLoader<PathTreeUnit> {
 
     private final Path rootDir;
     private final Comparator<PathTreeUnit> unitComparator;
 
-    public TreeDirRootLoader(Path rootDir, Comparator<PathTreeUnit> unitComparator) {
+    public TreeDirPathLoader(Path rootDir, Comparator<PathTreeUnit> unitComparator) {
         this.rootDir = rootDir;
         this.unitComparator = unitComparator;
     }

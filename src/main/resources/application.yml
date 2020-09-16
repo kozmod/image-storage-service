@@ -1,6 +1,6 @@
 app:
   file:
-    path: /Users/a18388871/IdeaProjects/image-storage-service
+    path: /Users/a18388871/IdeaProjects/image-storage-service/src/test/resources/tmp
 spring:
   main:
     banner-mode: log

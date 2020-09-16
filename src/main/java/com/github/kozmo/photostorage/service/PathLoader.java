@@ -3,7 +3,7 @@ package com.github.kozmo.photostorage.service;
 import java.io.IOException;
 import java.nio.file.Path;
 
-public interface RootLoader<T> {
+public interface PathLoader<T> {
 
     T fromRoot() throws IOException;
 

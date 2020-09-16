@@ -12,16 +12,17 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public final class ImagesRootLoader implements RootLoader<Collection<Path>> {
+public class ImagesPathLoader implements PathLoader<Collection<Path>>, PathResourceLoader {
 
-    private final Path rootDir;
-    private final ResourceLoader resourceLoader;
+    final Path rootDir;
+    final ResourceLoader resourceLoader;
 
-    public ImagesRootLoader(String root, ResourceLoader resourceLoader) {
+    public ImagesPathLoader(String root, ResourceLoader resourceLoader) {
         this.rootDir = Paths.get(root);
         this.resourceLoader = resourceLoader;
     }
 
+    @Override
     public Resource load(Path path) {
         var resolvedPath = "file:" + rootDir.resolve(path);
         return resourceLoader.getResource(resolvedPath);
@@ -43,7 +44,7 @@ public final class ImagesRootLoader implements RootLoader<Collection<Path>> {
                 .collect(Collectors.toList());
     }
 
-    private boolean isImage(Path path) throws IOException {
+    boolean isImage(Path path) throws IOException {
         var mimetype = Files.probeContentType(path);
         return mimetype != null && mimetype.split("/")[0].equals("image");
     }

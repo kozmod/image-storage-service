@@ -1,7 +1,7 @@
 package com.github.kozmo.photostorage;
 
-import com.github.kozmo.photostorage.service.ImagesRootLoader;
-import com.github.kozmo.photostorage.service.TreeDirRootLoader;
+import com.github.kozmo.photostorage.service.ImagesPathLoader;
+import com.github.kozmo.photostorage.service.TreeDirPathLoader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,13 +17,13 @@ public class Conf {
     private String searchDir;
 
     @Bean
-    public ImagesRootLoader imagesLoader() {
-        return new ImagesRootLoader(searchDir, new DefaultResourceLoader());
+    public ImagesPathLoader imagesLoader() {
+        return new ImagesPathLoader(searchDir, new DefaultResourceLoader());
     }
 
     @Bean
-    public TreeDirRootLoader treeDirRootLoader() {
-        return new TreeDirRootLoader(
+    public TreeDirPathLoader treeDirRootLoader() {
+        return new TreeDirPathLoader(
                 Paths.get(searchDir),
                 Comparator.comparing(ptu -> ptu.value().getFileName().toString())
         );
