@@ -35,26 +35,26 @@ public final class PagingPathLoader implements PathLoader<PagingPathLoader.Resul
 
     public static class Result{
         private final Collection<Path> paths;
-        private final int allSize;
+        private final int total;
 
         public Result(Collection<Path> paths, int all) {
             this.paths = paths;
-            this.allSize = all;
+            this.total = all;
         }
 
-        public Collection<Path> getPaths() {
+        public Collection<Path> paths() {
             return paths;
         }
 
-        public int getAllSize() {
-            return allSize;
+        public int total() {
+            return total;
         }
 
         @Override
         public String toString() {
             return "Result{" +
                     "paths=" + paths +
-                    ", allSize=" + allSize +
+                    ", total=" + total +
                     '}';
         }
     }

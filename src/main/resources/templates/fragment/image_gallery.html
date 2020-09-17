@@ -2,12 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="immage_gallery">
-    <tb>
-        <tr>
-            <th><button th:value="${limit}" th:disabled="${leftButtonDisabled}"><</button></th>
-            <th><button th:value="-${limit}" th:disabled="${rightButtonDisabled}">></button></th>
-        </tr>
-    </tb>
     <!-- The four columns -->
     <div class="horizontal-scrollable">
         <div class="row">
@@ -19,10 +13,23 @@
     </div>
 
     <div>
+        <tb>
+            <tr>
+                <th><button class="paging-button"
+                            th:disabled="${previousButtonDisabled}"
+                            th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/${imgGalleryPath}?skip=-${skipPrevious}')|"><</button>
+                </th>
+                <th><button class="paging-button"
+                            th:disabled="${nextButtonDisabled}"
+                            th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/${imgGalleryPath}?skip=${skipNext}')|">></button>
+                </th>
+            </tr>
+        </tb>
+
         <div class="expanding-image-container">
-            <span onclick="this.parentElement.style.display='none'" class="closebtn">X</span>
+<!--            <span onclick="this.parentElement.style.display='none'" class="closebtn">X</span> todo think about-->
             <img id="expandedImg">
-            <div id="imgtext"></div>
+<!--            <div id="imgtext"></div>-->
         </div>
     </div>
 </div>
