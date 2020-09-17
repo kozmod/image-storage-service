@@ -9,7 +9,7 @@ function getFragmentAndChangeDiv(divId, reference) {
         headers: {
             Accept: "text/plain; charset=utf-8", "Content-Type": "text/plain; charset=utf-8"
         },
-        url: "dir/" + reference,
+        url: reference,
         method: "GET",
         data: {},
         success: function (data, textStatus, response) {
@@ -23,7 +23,7 @@ function getFragmentAndChangeDiv(divId, reference) {
         },
         error: function (response) {
             // change_and_run_error_popup(response);
-            // echo("error")
+            allert("error")
         }
     });
 }

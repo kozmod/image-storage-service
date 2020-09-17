@@ -52,8 +52,8 @@ public class DirController {
     public String getDirImageBlock(@PathVariable("path") String path, Map<String, Object> model) throws IOException {
         path = path.equals("root") ? "" : path;
         var result = loaderFactory.apply(0L).fromSub(Paths.get(path));
-        model.put("leftButton", true);
-        model.put("rightButton", !(result.getAllSize() > properties.getLimit()));
+        model.put("leftButtonDisabled", true);
+        model.put("rightButtonDisabled", !(result.getAllSize() > properties.getLimit()));
         model.put("limit", properties.getLimit());
         model.put("dirs", result.getPaths());
         return GALLERY;
