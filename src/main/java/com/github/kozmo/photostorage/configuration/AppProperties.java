@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource(value = "classpath:properties.yml", factory = YamlPropertySourceFactory.class)
-public class AppProperties {
+public final class AppProperties {
 
     @Value("${file.search-dir}")
     private String searchDir;

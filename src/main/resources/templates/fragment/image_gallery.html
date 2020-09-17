@@ -2,6 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="immage_gallery">
+    <tb>
+        <tr>
+            <th><button th:value="${limit}" th:disabled="${leftButtonDisabled}"><</button></th>
+            <th><button th:value="-${limit}" th:disabled="${rightButtonDisabled}">></button></th>
+        </tr>
+    </tb>
     <!-- The four columns -->
     <div class="horizontal-scrollable">
         <div class="row">
@@ -11,13 +17,6 @@
             </div>
         </div>
     </div>
-    <div th:if="${leftButton}">
-        <button class="paging-button" th:value="${limit}"><</button>
-    </div>
-    <div th:if="${rightButton}">
-        <button class="paging-button" th:value="-${limit}">></button>
-    </div>
-
 
     <div>
         <div class="expanding-image-container">

@@ -1,7 +1,7 @@
 package com.github.kozmo.photostorage.service.path;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collection;
 
 public final class PathTreeUnit {
     private final Path val;

@@ -1,3 +1,4 @@
 file:
-  search-dir: /Users/kozmod/IdeaProjects/image-storage-service/src/test/resources/tmp
+  search-dir: /Users/a18388871/IdeaProjects/image-storage-service/src/test/resources/tmp
+#  search-dir: /Users/kozmod/IdeaProjects/image-storage-service/src/test/resources/tmp
   limit: 5
