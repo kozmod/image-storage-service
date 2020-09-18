@@ -1,6 +1,5 @@
 package com.github.kozmo.photostorage.service.path;
 
-import com.github.kozmo.photostorage.utils.CheckedFunction;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.LinkedList;
+import java.util.Objects;
 
 public final class ImagesPathLoader implements PathLoader<Collection<Path>> {
 
@@ -25,13 +25,14 @@ public final class ImagesPathLoader implements PathLoader<Collection<Path>> {
 
     @Override
     public Collection<Path> fromSub(Path path) throws IOException {
-        return Files.list(rootDir.resolve(path))
-                .map(Path::toFile)
-                .filter(File::isFile)
-                .map(File::toPath)
-                .filter(CheckedFunction.predicate(this::isImage))
-                .map(rootDir::relativize)
-                .collect(Collectors.toList());
+        final Collection<Path> paths = new LinkedList<>();
+        var v = rootDir.resolve(path).toFile();
+        for (File file : Objects.requireNonNull(v.listFiles())) {
+            if (file.isFile() && isImage(file.toPath())) {
+                paths.add(rootDir.relativize(file.toPath()));
+            }
+        }
+        return paths;
     }
 
     private boolean isImage(Path path) throws IOException {

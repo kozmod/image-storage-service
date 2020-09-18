@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.LinkedList;
 
 public final class PagingPathLoader implements PathLoader<PagingPathLoader.Result> {
 
@@ -26,14 +26,23 @@ public final class PagingPathLoader implements PathLoader<PagingPathLoader.Resul
     @Override
     public Result fromSub(Path path) throws IOException {
         var loaded = loader.fromSub(path);
-        var paths = loaded.stream()
-                .skip(skip)
-                .limit(limit)
-                .collect(Collectors.toList());
+        final Collection<Path> paths = new LinkedList<>();
+        long i = 0;
+        long tmpLimit = limit;
+        for (Path p : loaded) {
+            i++;
+            if (i <= skip) {
+                tmpLimit++;
+                continue;
+            } else if (i > tmpLimit) {
+                break;
+            }
+            paths.add(p);
+        }
         return new Result(paths, loaded.size());
     }
 
-    public static class Result{
+    public static class Result {
         private final Collection<Path> paths;
         private final int total;
 

@@ -38,24 +38,24 @@
         <!--/*@thymesVar id="schild" type="com.github.kozmo.photostorage.service.path.PathTreeUnit"*/-->
         <li class="tree_view_text">
             <span class="caret" th:text="'/'  + ${treeRoot.value().getFileName()}"
-                  th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/root')|">ROOT_NODE</span>
+                  th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/root?skip=0')|">ROOT_NODE</span>
             <ul class="nested">
                 <div th:each="child, i : ${treeRoot.children()}">
                     <span class="caret"
                           th:text="${child.value().getFileName()}"
-                          th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/${child.value()}')|"></span>
+                          th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/${child.value()}?skip=0')|"></span>
                     <div th:fragment="fragment_node(child)" th:unless="${#lists.isEmpty(child.children())}">
                         <ul class="nested">
                             <div th:each="schild, i : ${child.children()}">
                                 <div th:switch="${schild.children().isEmpty()}">
                                     <li th:case="true" class="tree_view_text"
                                         th:text="${schild.value().getFileName()}"
-                                        th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/${schild.value()}')|"
+                                        th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/${schild.value()}?skip=0')|"
                                     >CHILD
                                     </li>
                                     <li th:case="false" class="tree_view_text">
                                         <span class="caret" th:text="${schild.value().getFileName()}"
-                                              th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/${schild.value()}')|"
+                                              th:attr="onclick=|getFragmentAndChangeDiv('#content','dir/${schild.value()}?skip=0')|"
                                         ></span>
                                         <ul class="nested" th:replace="this::fragment_node(${schild})"></ul>
                                     </li>
