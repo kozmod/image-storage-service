@@ -25,16 +25,17 @@ public final class PagingPathLoader implements PathLoader<PagingPathLoader.Resul
 
     @Override
     public Result fromSub(Path path) throws IOException {
-        var loaded = loader.fromSub(path);
-        final Collection<Path> paths = new LinkedList<>();
-        long i = 0;
-        long tmpLimit = limit;
+        final var loaded = loader.fromSub(path);
+        final var paths = new LinkedList<Path>();
+        var i = 0;
+        var tmpLimit = limit;
         for (Path p : loaded) {
             i++;
             if (i <= skip) {
                 tmpLimit++;
                 continue;
-            } else if (i > tmpLimit) {
+            }
+            if (i > tmpLimit) {
                 break;
             }
             paths.add(p);
