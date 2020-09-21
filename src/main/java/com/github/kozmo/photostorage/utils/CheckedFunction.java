@@ -4,6 +4,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 @FunctionalInterface
+@Deprecated
 public interface CheckedFunction<T, R> {
 
     R apply(T t) throws Exception;
