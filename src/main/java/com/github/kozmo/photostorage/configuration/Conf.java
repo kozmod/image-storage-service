@@ -5,7 +5,11 @@ import com.github.kozmo.photostorage.service.path.PagingPathLoader;
 import com.github.kozmo.photostorage.service.path.PathLoader;
 import com.github.kozmo.photostorage.service.path.TreeDirPathLoader;
 import com.github.kozmo.photostorage.service.resource.FileResourceLoader;
+import io.undertow.server.DefaultByteBufferPool;
+import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -29,7 +33,6 @@ public class Conf {
     }
 
     @Bean
-    @Autowired
     public Function<Long, ? extends PathLoader<PagingPathLoader.Result>> imagePathLoaderFactory(ImagesPathLoader loader) {
         return skip -> new PagingPathLoader(loader, skip, properties.getLimit());
     }
