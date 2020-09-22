@@ -1,5 +1,5 @@
 file:
-#  search-dir: /Users/a18388871/IdeaProjects/image-storage-service/src/test/resources/tmp
+  search-dir: /Users/a18388871/IdeaProjects/image-storage-service/src/test/resources/tmp
 #  search-dir: /Users/kozmod/IdeaProjects/image-storage-service/src/test/resources/tmp
-  search-dir: /Volumes/HD-PZU3/DCIM/100CANON
+#  search-dir: /Volumes/HD-PZU3/DCIM/100CANON
   limit: 25
